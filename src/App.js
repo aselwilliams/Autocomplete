@@ -1,5 +1,4 @@
 import Autocomplete from './Autocomplete';
-import {Input} from 'react-bootstrap'
 import './App.css';
 import countries from './countries'
 

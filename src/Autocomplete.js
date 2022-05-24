@@ -1,6 +1,8 @@
-import {useState} from 'react'
+import {useState} from 'react';
+import SuggestionsListComponent from './SuggestionsListComponent'
 
-function Autocomplete() {
+
+function Autocomplete({suggestions}) {
     const [filteredSuggestions,setFilteredSuggestions]= useState([]);
     const [activeSuggestionIndex,setActiveSuggestionIndex]= useState(0);
     const [showSuggestions, setShowSuggestions] = useState(false);
@@ -15,10 +17,18 @@ function Autocomplete() {
       setActiveSuggestionIndex(0);
       setShowSuggestions(true);
     };
-    
+
+    const onKeyDown=(key)=>{
+        console.log('keydown', key.keyCode);//13 is Enter, 9 is Tab
+        if(key.keyCode===13 || key.keyCode===9){
+            setInput(filteredSuggestions[activeSuggestionIndex]);
+            setFilteredSuggestions([]);
+        }
+    }
+
   return (
    <>
-   <Input type='text' onChange={onChange} onKewDown={onKeyDown} value={input} />
+   <input type='text' onChange={onChange} onKewDown={onKeyDown} value={input} />
    {showSuggestions && input && <SuggestionsListComponent />}
    </>
   )
