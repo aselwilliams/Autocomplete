@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import SuggestionsListComponent from './SuggestionsListComponent'
+import SuggestionsList from './SuggestionsList'
 
 
 function Autocomplete({suggestions}) {
@@ -25,11 +25,17 @@ function Autocomplete({suggestions}) {
             setFilteredSuggestions([]);
         }
     }
+    const onClick=(e)=>{
+        setFilteredSuggestions([]);
+        setInput(e.target.innerText);
+        setActiveSuggestionIndex(0);
+        setShowSuggestions(false);
+    }
 
   return (
    <>
    <input type='text' onChange={onChange} onKewDown={onKeyDown} value={input} />
-   {showSuggestions && input && <SuggestionsListComponent />}
+   {showSuggestions && input && <SuggestionsList filteredSuggestions={filteredSuggestions} onClick={onClick} activeSuggestionIndex={activeSuggestionIndex}/>}
    </>
   )
 }
